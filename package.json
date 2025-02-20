@@ -1,0 +1,29 @@
+{
+  "name": "youtube-music-player",
+  "version": "1.0.0",
+  "description": "youtube music player",
+  "keywords": [],
+  "author": "LonoxX",
+  "license": "MIT",
+  "main": "src/server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LonoxX/Youtube-Music-Player.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LonoxX/Youtube-Music-Player/issues"
+  },
+  "homepage": "https://github.com/LonoxX/Youtube-Music-Player#readme",
+
+
+  "scripts": {
+    "dev": "nodemon src/server.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

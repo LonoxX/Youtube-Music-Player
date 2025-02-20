@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <button class="mobile-nav-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-overlay"></div>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fab fa-youtube"></i>
+                <span>Music Player</span>
+            </div>
+
+            <!-- Navigation -->
+            <nav class="main-nav">
+                <ul>
+                    <li class="nav-item active" data-view="now-playing">
+                        <i class="fas fa-music"></i>
+                        <span>Now Playing</span>
+                        <div class="nav-item-highlight"></div>
+                    </li>
+                    <li class="nav-item" data-view="search">
+                        <i class="fas fa-search"></i>
+                        <span>Search</span>
+                        <div class="nav-item-highlight"></div>
+                    </li>
+                    <li class="nav-item" data-view="credits">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Credits</span>
+                        <div class="nav-item-highlight"></div>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Now Playing View -->
+            <div class="view-section active" id="now-playing-view">
+                <div class="song-details">
+                    <div class="artwork-section">
+                        <img id="song-image" src="" alt="Album Art">
+                        <div class="artwork-overlay">
+                            <button class="play-pause-overlay command-btn" data-endpoint="/api/v1/play">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="song-info">
+                        <h1 id="song-title">Loading...</h1>
+                        <h2 id="song-artist"></h2>
+                        <div class="song-actions">
+                            <a id="song-url" href="#" target="_blank" class="btn-youtube">
+                                <i class="fab fa-youtube"></i> Open in YouTube
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Queue Section -->
+                <div class="queue-section">
+                    <div class="queue-header">
+                        <div class="queue-title">
+                            <h3>Queue</h3>
+                            <span class="queue-count" id="queueCount">0 Songs</span>
+                        </div>
+                        <div class="queue-actions">
+                            <button class="btn-icon" id="clearQueue">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="queue-content">
+                        <div class="queue-now-playing">
+                            <div class="section-label">CURRENT SONG</div>
+                            <div id="nowPlayingItem" class="queue-item current"></div>
+                        </div>
+                        <div class="queue-next">
+                            <div class="section-label">NEXT SONGS</div>
+                            <div id="queueList" class="queue-list"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search View -->
+            <div class="view-section" id="search-view">
+                <div class="view-header">
+                    <h1>Search Songs</h1>
+                    <div class="search-bar">
+                        <div class="search-input-group">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Search for songs, artists or albums...">
+                            <button class="search-clear" id="searchClear">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="search-results-container">
+                    <div id="searchResults" class="search-results">
+                        <!-- Search results will be inserted here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Credits View -->
+            <div class="view-section" id="credits-view">
+                <div class="credits-container">
+                    <h1>About This App</h1>
+                    <div class="credits-content">
+                        <div class="credits-section">
+                            <h2>Development</h2>
+                            <p>Created by LonoxX</p>
+                            <p>Version <span id="app-version">Loading...</span></p>
+                            <p>Licensed under the MIT License</p>
+                        </div>
+
+                        <div class="credits-section">
+                            <h2>Technologies</h2>
+                            <ul class="tech-list">
+                                <li>
+                                    <i class="fab fa-node-js"></i>
+                                    <span>Node.js</span>
+                                </li>
+                                <li>
+                                    <i class="fab fa-js"></i>
+                                    <span>JavaScript</span>
+                                </li>
+                                <li>
+                                    <i class="fab fa-html5"></i>
+                                    <span>HTML5</span>
+                                </li>
+                                <li>
+                                    <i class="fab fa-css3-alt"></i>
+                                    <span>CSS3</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="credits-section">
+                            <h2>Powered By</h2>
+                            <div class="powered-by">
+                                <div class="powered-by-item">
+                                    <a href="https://github.com/th-ch/youtube-music" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                        <span>th-ch/youtube-music</span>
+                                    </a>
+                                </div>
+                                <div class="powered-by-item">
+                                    <a href="https://github.com/lonoxX" target="_blank">
+                                        <i class="fab fa-github"></i>
+                                        <span>LonoxX</span>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Player Bar -->
+        <footer class="player-bar">
+            <!-- Mini Player -->
+            <div class="mini-player">
+                <div class="mini-player-artwork">
+                    <img id="mini-player-image" src="" alt="Current Track">
+                </div>
+                <div class="mini-player-info">
+                    <div id="mini-player-title" class="mini-player-title"></div>
+                    <div id="mini-player-artist" class="mini-player-artist"></div>
+                </div>
+            </div>
+
+            <!-- Main Controls -->
+            <div class="main-player-section">
+                <div class="player-controls-main">
+                    <div class="playback-controls">
+                        <button id="shuffleBtn" class="btn-icon" title="Shuffle">
+                            <i class="fas fa-random"></i>
+                        </button>
+                        <button class="btn-icon command-btn" data-endpoint="/api/v1/previous" title="Previous">
+                            <i class="fas fa-step-backward"></i>
+                        </button>
+                        <button class="btn-icon btn-play command-btn main-play-button" data-endpoint="/api/v1/play" title="Play">
+                            <i class="fas fa-play-circle"></i>
+                        </button>
+                        <button class="btn-icon command-btn" data-endpoint="/api/v1/next" title="Next">
+                            <i class="fas fa-step-forward"></i>
+                        </button>
+                        <button id="repeatBtn" class="btn-icon" title="Repeat">
+                            <i class="fas fa-redo"></i>
+                        </button>
+                    </div>
+                    <div class="playback-timeline">
+                        <span id="song-elapsed" class="time">0:00</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress">
+                                <div id="song-progress" class="progress-bar"></div>
+                                <div class="progress-handle"></div>
+                            </div>
+                        </div>
+                        <span id="song-duration" class="time">0:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extra Controls -->
+            <div class="player-controls-secondary">
+                <div class="volume-controls">
+                    <button id="muteBtn" class="btn-icon" title="Mute">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    <div class="volume-slider-container">
+                        <div class="volume-slider-wrapper">
+                            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="100">
+                            <div class="volume-slider-progress"></div>
+                        </div>
+                        <div class="volume-tooltip">
+                            <span id="volume-value">100</span>%
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
